@@ -1,4 +1,5 @@
-<h5>Android</h5>
+# How to add VLC lib
+## Android
 <p>1. In dependencies at android/app/build.gradle add -> implementation group: 'org.videolan.android', name: 'libvlc-all', version: '3.2.6'</p>
 <p>2. In the same file (android/app/buidl.gradle), at android add: </p>
 <p>
