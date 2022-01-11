@@ -11,6 +11,8 @@
 import React from 'react';
 import {
   Button,
+  Platform,
+  requireNativeComponent,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -20,6 +22,7 @@ import {
 import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
 import AndroidVLCModule from './native_modules/AndroidVLCModule';
 
+const CounterView = requireNativeComponent("CounterView")
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -27,8 +30,8 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  function play(){
-    AndroidVLCModule.play("http://streams.videolan.org/streams/mp4/Mr_MrsSmith-h264_aac.mp4")
+  function play() {
+    if (Platform.OS === "android") AndroidVLCModule.play("http://streams.videolan.org/streams/mp4/Mr_MrsSmith-h264_aac.mp4");
   }
 
   return (
@@ -43,6 +46,7 @@ const App = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Button onPress={play} title='PLAY WITH VLC' />
+          {Platform.OS === "ios" && <CounterView style={{ alignItems: "center", justifyContent: "center", width: 200, height: 200 }} />}
         </View>
       </ScrollView>
     </SafeAreaView>
